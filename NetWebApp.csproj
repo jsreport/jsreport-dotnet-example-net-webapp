@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="packages\Microsoft.Net.Compilers.2.3.1\build\Microsoft.Net.Compilers.props" Condition="Exists('packages\Microsoft.Net.Compilers.2.3.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,11 +52,11 @@
     <Reference Include="jsreport.Binary, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\jsreport.Binary.1.8.2\lib\net45\jsreport.Binary.dll</HintPath>
     </Reference>
-    <Reference Include="jsreport.Client, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\jsreport.Client.2.0.0\lib\net45\jsreport.Client.dll</HintPath>
+    <Reference Include="jsreport.Client, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\jsreport.Client.2.0.2\lib\net45\jsreport.Client.dll</HintPath>
     </Reference>
-    <Reference Include="jsreport.Local, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\jsreport.Local.1.0.1\lib\net45\jsreport.Local.dll</HintPath>
+    <Reference Include="jsreport.Local, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\jsreport.Local.1.0.2\lib\net45\jsreport.Local.dll</HintPath>
     </Reference>
     <Reference Include="jsreport.MVC, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\jsreport.MVC.2.0.0\lib\net46\jsreport.MVC.dll</HintPath>
@@ -64,8 +64,8 @@
     <Reference Include="jsreport.Shared, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\jsreport.Shared.1.0.1\lib\net45\jsreport.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="jsreport.Types, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\jsreport.Types.1.7.0\lib\net45\jsreport.Types.dll</HintPath>
+    <Reference Include="jsreport.Types, Version=1.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\jsreport.Types.1.8.3\lib\net45\jsreport.Types.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -199,12 +199,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\Header.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -217,6 +220,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\jsrtest - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\jsrtest2 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\jsrtest3 - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -250,8 +256,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.Net.Compilers.2.3.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Net.Compilers.2.3.1\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
