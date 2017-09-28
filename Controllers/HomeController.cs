@@ -38,7 +38,7 @@ namespace NetWebApp.Controllers
         {
             HttpContext.JsReportFeature()
                 .Recipe(Recipe.PhantomPdf)
-                .Configure((r) => r.Template.Phantom.Header = this.RenderViewToString("Header", new { }));
+                .Configure((r) => r.Template.Phantom = new Phantom { Header = this.RenderViewToString("Header", new { }) });
 
             return View("Invoice", InvoiceModel.Example());
         }
