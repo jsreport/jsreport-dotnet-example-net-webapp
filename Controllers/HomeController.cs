@@ -19,7 +19,7 @@ namespace NetWebApp.Controllers
         [EnableJsReport()]
         public ActionResult Invoice()
         {
-            HttpContext.JsReportFeature().Recipe(Recipe.PhantomPdf);
+            HttpContext.JsReportFeature().Recipe(Recipe.ChromePdf);
 
             return View(InvoiceModel.Example());
         }
@@ -27,7 +27,7 @@ namespace NetWebApp.Controllers
         [EnableJsReport()]
         public ActionResult InvoiceDownload()
         {
-            HttpContext.JsReportFeature().Recipe(Recipe.PhantomPdf)
+            HttpContext.JsReportFeature().Recipe(Recipe.ChromePdf)
                 .OnAfterRender((r) => HttpContext.Response.Headers["Content-Disposition"] = "attachment; filename=\"myReport.pdf\"");
 
             return View("Invoice", InvoiceModel.Example());
@@ -37,8 +37,15 @@ namespace NetWebApp.Controllers
         public ActionResult InvoiceWithHeader()
         {
             HttpContext.JsReportFeature()
-                .Recipe(Recipe.PhantomPdf)
-                .Configure((r) => r.Template.Phantom = new Phantom { Header = this.RenderViewToString("Header", new { }) });
+                .Recipe(Recipe.ChromePdf)
+                .Configure((r) => r.Template.Chrome = new Chrome {
+                    HeaderTemplate = this.RenderViewToString("Header", new { }),
+                    DisplayHeaderFooter = true,
+                    MarginTop = "2cm",
+                    MarginLeft = "1cm",
+                    MarginBottom = "2cm",
+                    FooterTemplate = " "
+                });
 
             return View("Invoice", InvoiceModel.Example());
         }
@@ -67,7 +74,7 @@ namespace NetWebApp.Controllers
         {
             HttpContext.JsReportFeature()
                 .DebugLogsToResponse()
-                .Recipe(Recipe.PhantomPdf);
+                .Recipe(Recipe.ChromePdf);
 
             return View("Invoice", InvoiceModel.Example());
         }
