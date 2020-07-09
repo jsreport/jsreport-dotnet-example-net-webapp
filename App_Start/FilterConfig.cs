@@ -1,6 +1,8 @@
 ﻿using jsreport.Binary;
 using jsreport.Local;
 using jsreport.MVC;
+using System;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,10 +12,13 @@ namespace NetWebApp
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new JsReportFilterAttribute(new LocalReporting()
+            var rs = new LocalReporting()
                 .UseBinary(JsReportBinary.GetBinary())
+                .TempDirectory(Path.Combine((string)AppDomain.CurrentDomain.GetData("DataDirectory"), "jsreport-temp"))
                 .AsUtility()
-                .Create()));
+                .Create();
+
+            filters.Add(new JsReportFilterAttribute(rs));
             filters.Add(new HandleErrorAttribute());
         }
     }
